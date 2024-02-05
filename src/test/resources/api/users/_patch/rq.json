@@ -1,0 +1,4 @@
+{
+  "name": "${user.firstName} ${user.lastName}",
+  "email": "${user.email}"
+}

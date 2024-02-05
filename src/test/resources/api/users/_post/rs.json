@@ -1,0 +1,6 @@
+{
+  "name": "${user.firstName} ${user.lastName}",
+  "email": "${user.email}",
+  "id": "regex:[\\d]",
+  "createdAt": "predicate:datePredicate"
+}
