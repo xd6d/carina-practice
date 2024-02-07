@@ -1,4 +1,4 @@
-package com.solvd.carinapractice.model;
+package com.solvd.carinapractice.regres.model;
 
 import lombok.Builder;
 import lombok.Data;

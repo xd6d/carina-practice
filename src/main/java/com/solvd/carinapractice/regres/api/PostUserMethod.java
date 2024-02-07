@@ -1,4 +1,4 @@
-package com.solvd.carinapractice.api;
+package com.solvd.carinapractice.regres.api;
 
 import com.zebrunner.carina.api.AbstractApiMethodV2;
 import com.zebrunner.carina.api.annotation.Endpoint;

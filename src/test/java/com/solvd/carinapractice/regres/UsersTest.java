@@ -1,7 +1,7 @@
-package com.solvd.carinapractice;
+package com.solvd.carinapractice.regres;
 
-import com.solvd.carinapractice.api.*;
-import com.solvd.carinapractice.model.User;
+import com.solvd.carinapractice.regres.api.*;
+import com.solvd.carinapractice.regres.model.User;
 import com.zebrunner.carina.api.apitools.validation.JsonComparatorContext;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
 import io.restassured.response.Response;
