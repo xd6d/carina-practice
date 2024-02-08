@@ -8,7 +8,7 @@ import com.zebrunner.carina.api.apitools.builder.NotStringValuesProcessor;
 import com.zebrunner.carina.api.http.HttpMethodType;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
 
-@Endpoint(url = "${config.base_url}/api/users/${id}", methodType = HttpMethodType.GET)
+@Endpoint(url = "${config.api_url}/users/${id}", methodType = HttpMethodType.GET)
 @ResponseTemplatePath(path = "api/users/_get/get_single_user_rs.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
 public class GetSingleUserMethod extends AbstractApiMethodV2 {

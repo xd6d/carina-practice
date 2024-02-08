@@ -9,7 +9,7 @@ import com.zebrunner.carina.api.apitools.builder.NotStringValuesProcessor;
 import com.zebrunner.carina.api.http.HttpMethodType;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
 
-@Endpoint(url = "${config.base_url}/api/users", methodType = HttpMethodType.POST)
+@Endpoint(url = "${config.api_url}/users", methodType = HttpMethodType.POST)
 @RequestTemplatePath(path = "api/users/_post/rq.json")
 @ResponseTemplatePath(path = "api/users/_post/rs.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.CREATED_201)
