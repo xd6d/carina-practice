@@ -4,7 +4,7 @@
 
 #### Description
 
-When the main page is opened, there should present some advertisements and each of them must have images. And the main image of an advertisement should be the same at the main page and at the advertisement page.
+When the main page is opened, there should present some advertisements and each of them must have images. And the images of the banners of advertisements and that present at the advertisement's page should be the same(see the steps for more clear understanding).
 
 #### Steps and expected results
 
@@ -63,13 +63,13 @@ Every advertisement should contain basic information visible for user
 
 #### Description
 
-Every advertisement should contain basic information visible for user
+The user that knows what he wants to get should see an expected result using search
 
 #### Steps and expected results
 
 1. **Open the webpage** - Homepage is opened
 2. **Enter some product name(f.e. 'airpods') in the search input** - Input element is fulfilled with some text
-3. **Execute search by hitting 'Enter' button** - Webpage with the advertisements matching the search input appears
+3. **Execute search by hitting 'Enter' button** - Webpage appears with the advertisements all matching the search input
 
 #### Coverage of test
 
