@@ -4,19 +4,19 @@
 
 #### Description
 
-When the main page is opened, there should present some advertisements and each of them must have images. And the images of the banners of advertisements and that present at the advertisement's page should be the same(see the steps for more clear understanding).
+Attempt to log in with unregistered email must be failed and user must have been noticed that his email is not registered
 
 #### Steps and expected results
 
 1. **Open the webpage** - Homepage is opened
-2. **Scroll down to the advertisements** - Some random ads are present and each of them has image
-3. **Click any advertisement** - The advertisement page is opened. It's main image should be the same as it has been at the previous step
+2. **Click the 'Ваш профіль' button at the header** - Login page must appear
+3. **Enter some unregistered email and password** - 'Увійти' button is now available for clicking
+4. **Click 'Увійти' button** - The message with the following text appears: 'Ми не знайшли профіль із цією адресою електронної пошти. Повторіть спробу, використовуючи іншу адресу, або створіть профіль.'
 
 #### Coverage of test
 
-1. Check whether there is some advertisements at the main page
-2. Check whether the present advertisements have images
-3. Check whether the image at the main page matches with the image at the advertisement page
+1. Check whether the 'Увійти' button is unavailable with incorrect email or short password
+2. Check whether the specific error message appears
 
 ---
 
