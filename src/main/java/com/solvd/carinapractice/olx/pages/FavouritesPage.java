@@ -11,6 +11,7 @@ public class FavouritesPage extends AdsPage {
 
     public FavouritesPage(WebDriver driver) {
         super(driver);
+        setPageURL("favorites/");
     }
 
     public void clickAds() {

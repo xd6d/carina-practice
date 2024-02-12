@@ -30,7 +30,7 @@ User should be able to create a list of favourite advertisements and this list s
 
 1. **Open the webpage** - Homepage is opened
 2. **Scroll down to the advertisements** - Some random ads are present and the heart icon is present for every ad
-3. **Add some advertisements from the homepage to the favourites list by clicking heart icon** - The 'heart icon' element changes from 'adAddToFavorites' to 'removeAddToFavorites'
+3. **Add some advertisements from the homepage to the favourites list by clicking heart icon** - The 'heart icon' color changes
 4. **Go to the favourites webpage by clicking the following icon at the header** - The favourites webpage is opened and all the added ads are present
 
 #### Coverage of test

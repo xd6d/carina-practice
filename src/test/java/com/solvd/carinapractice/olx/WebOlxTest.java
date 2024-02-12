@@ -61,6 +61,7 @@ public class WebOlxTest extends AbstractTest {
 
         FavouritesPage favouritesPage = new FavouritesPage(getDriver());
         favouritesPage.clickAds();
+        favouritesPage.assertPageOpened();
 
         Assert.assertEquals(favouritesPage.getAds().size(), exceptedIds.size(), "Amount of added ads does not match.");
 
