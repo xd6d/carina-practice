@@ -1,0 +1,5 @@
+{
+  "name": "${user.firstName} ${user.lastName}",
+  "email": "${user.email}",
+  "updatedAt": "predicate:datePredicate"
+}
