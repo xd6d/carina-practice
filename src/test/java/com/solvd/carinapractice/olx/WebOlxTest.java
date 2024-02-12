@@ -57,9 +57,7 @@ public class WebOlxTest extends AbstractTest {
                     Assert.assertNotEquals(c.getHeartIconColor(), colorBefore, "Heart icon color has not changed");
                 });
 
-        homePage.clickFavourites();
-
-        FavouritesPage favouritesPage = new FavouritesPage(getDriver());
+        FavouritesPage favouritesPage = homePage.clickFavourites();
         favouritesPage.clickAds();
         favouritesPage.assertPageOpened();
 

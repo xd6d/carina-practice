@@ -21,7 +21,8 @@ public abstract class BasePage extends AbstractPage {
         profileButton.click();
     }
 
-    public void clickFavourites() {
+    public FavouritesPage clickFavourites() {
         favouritesButton.click();
+        return new FavouritesPage(getDriver());
     }
 }
