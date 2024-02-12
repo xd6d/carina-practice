@@ -52,7 +52,9 @@ public class WebOlxTest extends AbstractTest {
                 .limit(3)
                 .forEach(c -> {
                     exceptedIds.add(c.getId());
+                    String colorBefore = c.getHeartIconColor();
                     c.clickHeartIcon();
+                    Assert.assertNotEquals(c.getHeartIconColor(), colorBefore, "Heart icon color has not changed");
                 });
 
         homePage.clickFavourites();

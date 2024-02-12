@@ -8,9 +8,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class CardComponent extends AbstractUIObject {
 
-    @FindBy(xpath = ".//span[@data-testid=\"adAddToFavorites\"]")
-    private ExtendedWebElement addToFavouritesButton;
-
     @FindBy(xpath = ".//span[@data-testid=\"adAddToFavorites\" or @data-testid=\"adRemoveFromFavorites\"]/*")
     private ExtendedWebElement heartIcon;
 
@@ -22,7 +19,7 @@ public class CardComponent extends AbstractUIObject {
     }
 
     public void clickHeartIcon() {
-        addToFavouritesButton.click();
+        heartIcon.click(3);
     }
 
     public String getId() {
