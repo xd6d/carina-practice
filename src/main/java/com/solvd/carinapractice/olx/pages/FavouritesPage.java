@@ -4,9 +4,9 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class FavouritesPage extends AdsPage {
+public class FavouritesPage extends AdvertisementsPage {
 
-    @FindBy(css = "button[data-testid=\"select-ads\"]")
+    @FindBy(xpath = "//button[contains(text(), 'Вибрані оголошення')]")
     private ExtendedWebElement selectAdsButton;
 
     public FavouritesPage(WebDriver driver) {

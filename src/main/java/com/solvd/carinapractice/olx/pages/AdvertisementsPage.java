@@ -7,13 +7,13 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public abstract class AdsPage extends BasePage {
+public abstract class AdvertisementsPage extends BasePage {
 
     @Getter
-    @FindBy(xpath = "//div[@data-testid=\"l-card\"]")
-    private List<CardComponent> ads;
+    @FindBy(xpath = "//div[@data-testid='l-card']")
+    private List<CardComponent> advertisements;
 
-    public AdsPage(WebDriver driver) {
+    public AdvertisementsPage(WebDriver driver) {
         super(driver);
     }
 }

@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class CardComponent extends AbstractUIObject {
 
-    @FindBy(xpath = ".//span[@data-testid=\"adAddToFavorites\" or @data-testid=\"adRemoveFromFavorites\"]/*")
+    @FindBy(xpath = ".//span[@data-testid='adAddToFavorites' or @data-testid='adRemoveFromFavorites']/*")
     private ExtendedWebElement heartIcon;
 
     @FindBy(xpath = ".")

@@ -8,13 +8,13 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class HomePage extends AdsPage {
+public class HomePage extends AdvertisementsPage {
 
     @Getter
-    @FindBy(xpath = "//div[@data-testid=\"l-card\"]")
+    @FindBy(xpath = "//div[@data-testid='l-card']")
     private List<CardComponent> ads;
 
-    @FindBy(css = "button[data-testid=\"dismiss-cookies-banner\"]")
+    @FindBy(css = "button[data-testid='dismiss-cookies-banner']")
     private ExtendedWebElement dismissCookieButton;
 
     public HomePage(WebDriver driver) {
@@ -22,6 +22,6 @@ public class HomePage extends AdsPage {
     }
 
     public void dismissCookie() {
-        dismissCookieButton.clickIfPresent();
+        dismissCookieButton.clickIfPresent(10);
     }
 }

@@ -6,15 +6,16 @@ import com.solvd.carinapractice.olx.pages.HomePage;
 import com.solvd.carinapractice.olx.pages.LoginPage;
 import com.zebrunner.carina.core.AbstractTest;
 import com.zebrunner.carina.utils.R;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 public class WebOlxTest extends AbstractTest {
+
+    private static final String UNREGISTERED_EMAIL = R.TESTDATA.get("unregisteredEmail");
+    private static final String PASSWORD = R.TESTDATA.get("password");
 
     @Test(description = "test-case 1")
     void verifyLoginWithUnregisteredEmailTest() {
@@ -23,20 +24,13 @@ public class WebOlxTest extends AbstractTest {
         homePage.assertPageOpened();
         homePage.goToProfile();
 
-        String unregisteredEmail = R.TESTDATA.get("unregisteredEmail");
-        String password = R.TESTDATA.get("password");
-
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.assertPageOpened();
         Assert.assertFalse(loginPage.isUnregisteredEmailErrorMessagePresent(2), "Error message should not be present yet");
 
-        loginPage.login(unregisteredEmail, password);
-
-        new WebDriverWait(getDriver(), Duration.ofSeconds(10))
-                .withMessage("Login attempt timeout")
-                .until(d -> loginPage.isLoginButtonClickable());
-
-        Assert.assertTrue(loginPage.isUnregisteredEmailErrorMessagePresent(10), "Error message must occur");
+        boolean isLoginSuccess = loginPage.login(UNREGISTERED_EMAIL, PASSWORD);
+        Assert.assertTrue(isLoginSuccess, "Login attempt timeout");
+        Assert.assertTrue(loginPage.isUnregisteredEmailErrorMessagePresent(10), "Error message does not present");
     }
 
     @Test(description = "test-case 2")
@@ -47,7 +41,7 @@ public class WebOlxTest extends AbstractTest {
         homePage.dismissCookie();
 
         List<String> exceptedIds = new ArrayList<>();
-        homePage.getAds()
+        homePage.getAdvertisements()
                 .stream()
                 .limit(3)
                 .forEach(c -> {
@@ -61,9 +55,9 @@ public class WebOlxTest extends AbstractTest {
         favouritesPage.clickAds();
         favouritesPage.assertPageOpened();
 
-        Assert.assertEquals(favouritesPage.getAds().size(), exceptedIds.size(), "Amount of added ads does not match.");
+        Assert.assertEquals(favouritesPage.getAdvertisements().size(), exceptedIds.size(), "Amount of added ads does not match.");
 
-        Assert.assertTrue(exceptedIds.containsAll(favouritesPage.getAds().stream().map(CardComponent::getId).toList()),
+        Assert.assertTrue(exceptedIds.containsAll(favouritesPage.getAdvertisements().stream().map(CardComponent::getId).toList()),
                 "Ads does not match");
     }
 }

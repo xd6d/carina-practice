@@ -10,7 +10,7 @@ public abstract class BasePage extends AbstractPage {
     @FindBy(xpath = "//header//a[text()='Ваш профіль']")
     private ExtendedWebElement profileButton;
 
-    @FindBy(css = "svg[aria-label=\"Виділені\"]")
+    @FindBy(css = "svg[aria-label='Виділені']")
     private ExtendedWebElement favouritesButton;
 
     public BasePage(WebDriver driver) {
