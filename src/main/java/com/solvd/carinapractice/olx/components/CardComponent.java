@@ -1,5 +1,6 @@
 package com.solvd.carinapractice.olx.components;
 
+import com.solvd.carinapractice.olx.pages.AdvertisementPage;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import org.openqa.selenium.SearchContext;
@@ -24,6 +25,11 @@ public class CardComponent extends AbstractUIObject {
 
     public String getId() {
         return thisCard.getAttribute("id");
+    }
+
+    public AdvertisementPage click() {
+        thisCard.click();
+        return new AdvertisementPage(getDriver());
     }
 
     public String getHeartIconColor() {

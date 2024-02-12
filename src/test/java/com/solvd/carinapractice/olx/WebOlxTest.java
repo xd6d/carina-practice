@@ -1,19 +1,25 @@
 package com.solvd.carinapractice.olx;
 
 import com.solvd.carinapractice.olx.components.CardComponent;
+import com.solvd.carinapractice.olx.pages.AdvertisementPage;
 import com.solvd.carinapractice.olx.pages.FavouritesPage;
 import com.solvd.carinapractice.olx.pages.HomePage;
 import com.solvd.carinapractice.olx.pages.LoginPage;
 import com.zebrunner.carina.core.AbstractTest;
 import com.zebrunner.carina.utils.R;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class WebOlxTest extends AbstractTest {
 
+    private static final Logger LOGGER = LogManager.getLogger(WebOlxTest.class);
     private static final String UNREGISTERED_EMAIL = R.TESTDATA.get("unregisteredEmail");
     private static final String PASSWORD = R.TESTDATA.get("password");
 
@@ -26,11 +32,11 @@ public class WebOlxTest extends AbstractTest {
 
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.assertPageOpened();
-        Assert.assertFalse(loginPage.isUnregisteredEmailErrorMessagePresent(2), "Error message should not be present yet");
+        Assert.assertFalse(loginPage.isUnregisteredEmailErrorMessagePresent(2), "Error message should not be present yet!");
 
         boolean isLoginSuccess = loginPage.login(UNREGISTERED_EMAIL, PASSWORD);
-        Assert.assertTrue(isLoginSuccess, "Login attempt timeout");
-        Assert.assertTrue(loginPage.isUnregisteredEmailErrorMessagePresent(10), "Error message does not present");
+        Assert.assertTrue(isLoginSuccess, "Login attempt timeout!");
+        Assert.assertTrue(loginPage.isUnregisteredEmailErrorMessagePresent(10), "Error message does not present!");
     }
 
     @Test(description = "test-case 2")
@@ -48,16 +54,46 @@ public class WebOlxTest extends AbstractTest {
                     exceptedIds.add(c.getId());
                     String colorBefore = c.getHeartIconColor();
                     c.clickHeartIcon();
-                    Assert.assertNotEquals(c.getHeartIconColor(), colorBefore, "Heart icon color has not changed");
+                    Assert.assertNotEquals(c.getHeartIconColor(), colorBefore, "Heart icon color has not changed!");
                 });
 
         FavouritesPage favouritesPage = homePage.clickFavourites();
         favouritesPage.clickAds();
         favouritesPage.assertPageOpened();
 
-        Assert.assertEquals(favouritesPage.getAdvertisements().size(), exceptedIds.size(), "Amount of added ads does not match.");
+        Assert.assertEquals(favouritesPage.getAdvertisements().size(), exceptedIds.size(), "Amount of added ads does not match!");
 
         Assert.assertTrue(exceptedIds.containsAll(favouritesPage.getAdvertisements().stream().map(CardComponent::getId).toList()),
-                "Ads does not match");
+                "Ads does not match!");
+    }
+
+    @Test(description = "test case 3")
+    void verifyBasicAdvertisementInformationTest() {
+        SoftAssert softAssert = new SoftAssert();
+
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        homePage.assertPageOpened();
+        homePage.dismissCookie();
+
+        int advertisementIndex = new Random().nextInt(homePage.getAdvertisements().size());
+        LOGGER.info("Chose advertisement with index %d".formatted(advertisementIndex));
+
+        AdvertisementPage advertisementPage = homePage.getAdvertisements().get(advertisementIndex).click();
+        advertisementPage.assertPageOpened();
+
+        softAssert.assertTrue(advertisementPage.isAdvertisementTitlePresent(), "Advertisement title is not present!");
+        softAssert.assertTrue(advertisementPage.isContactButtonPresent(), "Contact button is not present!");
+        softAssert.assertTrue(advertisementPage.isShowPhoneButtonPresent(), "Show phone button is not present!");
+        softAssert.assertTrue(advertisementPage.isSellerNamePresent(), "Seller name is not present!");
+        softAssert.assertTrue(advertisementPage.isDescriptionPresent(), "Description is not present!");
+
+        softAssert.assertTrue(advertisementPage.isContactButtonClickable(), "Contact button is not clickable!");
+        softAssert.assertTrue(advertisementPage.isShowPhoneButtonClickable(), "Show phone button is not clickable!");
+
+        LOGGER.info("Advertisement title: " + advertisementPage.getAdvertisementTitle());
+        LOGGER.info("Seller name: " + advertisementPage.getSellerName());
+
+        softAssert.assertAll();
     }
 }

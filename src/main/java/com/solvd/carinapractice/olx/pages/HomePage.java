@@ -11,8 +11,8 @@ import java.util.List;
 public class HomePage extends AdvertisementsPage {
 
     @Getter
-    @FindBy(xpath = "//div[@data-testid='l-card']")
-    private List<CardComponent> ads;
+    @FindBy(xpath = "//div[@data-testid='l-card' and not(div[contains(@class, 'jobs-ad-card')])]")
+    private List<CardComponent> advertisements;
 
     @FindBy(css = "button[data-testid='dismiss-cookies-banner']")
     private ExtendedWebElement dismissCookieButton;
