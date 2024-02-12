@@ -1,10 +1,7 @@
 package com.solvd.carinapractice.olx;
 
 import com.solvd.carinapractice.olx.components.CardComponent;
-import com.solvd.carinapractice.olx.pages.AdvertisementPage;
-import com.solvd.carinapractice.olx.pages.FavouritesPage;
-import com.solvd.carinapractice.olx.pages.HomePage;
-import com.solvd.carinapractice.olx.pages.LoginPage;
+import com.solvd.carinapractice.olx.pages.*;
 import com.zebrunner.carina.core.AbstractTest;
 import com.zebrunner.carina.utils.R;
 import org.apache.logging.log4j.LogManager;
@@ -15,6 +12,7 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class WebOlxTest extends AbstractTest {
@@ -22,6 +20,7 @@ public class WebOlxTest extends AbstractTest {
     private static final Logger LOGGER = LogManager.getLogger(WebOlxTest.class);
     private static final String UNREGISTERED_EMAIL = R.TESTDATA.get("unregisteredEmail");
     private static final String PASSWORD = R.TESTDATA.get("password");
+    private static final String SEARCH_INPUT = "airpods";
 
     @Test(description = "test-case 1")
     void verifyLoginWithUnregisteredEmailTest() {
@@ -80,7 +79,7 @@ public class WebOlxTest extends AbstractTest {
         LOGGER.info("Chose advertisement with index %d".formatted(advertisementIndex));
 
         AdvertisementPage advertisementPage = homePage.getAdvertisements().get(advertisementIndex).click();
-        advertisementPage.assertPageOpened();
+        advertisementPage.assertPageOpened(5);
 
         softAssert.assertTrue(advertisementPage.isAdvertisementTitlePresent(), "Advertisement title is not present!");
         softAssert.assertTrue(advertisementPage.isContactButtonPresent(), "Contact button is not present!");
@@ -95,5 +94,28 @@ public class WebOlxTest extends AbstractTest {
         LOGGER.info("Seller name: " + advertisementPage.getSellerName());
 
         softAssert.assertAll();
+    }
+
+    @Test(description = "test case 4")
+    void verifySearchResultTest() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        homePage.assertPageOpened();
+        homePage.dismissCookie();
+
+        homePage.typeSearch(SEARCH_INPUT);
+        ListAdvertisementsPage advertisementsPage = homePage.executeSearch();
+        advertisementsPage.assertPageOpened();
+
+        for (CardComponent advertisement : advertisementsPage.getAdvertisements()) {
+            Assert.assertTrue(advertisement.getAdvertisementTitle().toLowerCase(Locale.ROOT).contains(SEARCH_INPUT),
+                    "Title does not contain search input: %s. Search input: %s".formatted(advertisement.getAdvertisementTitle(), SEARCH_INPUT));
+        }
+
+    }
+
+    @Test(description = "test case 5")
+    void verifyObminPriceBannerTest() {
+
     }
 }

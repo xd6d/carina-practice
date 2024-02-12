@@ -12,6 +12,9 @@ public class CardComponent extends AbstractUIObject {
     @FindBy(xpath = ".//span[@data-testid='adAddToFavorites' or @data-testid='adRemoveFromFavorites']/*")
     private ExtendedWebElement heartIcon;
 
+    @FindBy(xpath = ".//*[self::p or self::h6][2]/preceding-sibling::*")
+    private ExtendedWebElement advertisementTitle;
+
     @FindBy(xpath = ".")
     private ExtendedWebElement thisCard;
 
@@ -34,5 +37,9 @@ public class CardComponent extends AbstractUIObject {
 
     public String getHeartIconColor() {
         return heartIcon.getElement().getCssValue("color");
+    }
+
+    public String getAdvertisementTitle() {
+        return advertisementTitle.getText();
     }
 }

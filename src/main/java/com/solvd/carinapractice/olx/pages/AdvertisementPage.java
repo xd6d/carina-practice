@@ -1,7 +1,6 @@
 package com.solvd.carinapractice.olx.pages;
 
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -24,14 +23,14 @@ public class AdvertisementPage extends BasePage {
 
     public AdvertisementPage(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
+        setPageAbsoluteURL("https://www.olx.ua/d/uk/obyavlenie/$ignore");
         setUiLoadedMarker(description);
     }
 
     public boolean isAdvertisementTitlePresent() {
         return advertisementTitle.isElementPresent(5);
     }
-    
+
     public String getAdvertisementTitle() {
         return advertisementTitle.getText();
     }
