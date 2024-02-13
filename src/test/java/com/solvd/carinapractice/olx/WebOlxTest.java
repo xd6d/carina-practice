@@ -35,7 +35,7 @@ public class WebOlxTest extends AbstractTest {
         Assert.assertFalse(loginPage.isUnregisteredEmailErrorMessagePresent(2), "Error message should not be present yet!");
 
         boolean isLoginSuccess = loginPage.login(UNREGISTERED_EMAIL, PASSWORD);
-        pause(3);
+
         Assert.assertTrue(isLoginSuccess, "Login attempt timeout!");
         Assert.assertTrue(loginPage.isUnregisteredEmailErrorMessagePresent(2), "Error message does not present!");
     }
