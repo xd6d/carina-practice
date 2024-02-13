@@ -2,7 +2,6 @@ package com.solvd.carinapractice.olx.pages;
 
 import com.solvd.carinapractice.olx.components.CardComponent;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -16,29 +15,20 @@ public class HomePage extends AdvertisementsPage {
     @FindBy(css = "button[data-testid='dismiss-cookies-banner']")
     private ExtendedWebElement dismissCookieButton;
 
-    @FindBy(id = "search")
-    private ExtendedWebElement searchInput;
+    @FindBy(xpath = "//h2[contains(text(), 'Розділи')]//following-sibling::*//span[text()='Обмін']")
+    private ExtendedWebElement barterBanner;
 
     public HomePage(WebDriver driver) {
         super(driver);
-        setUiLoadedMarker(searchInput);
+        setUiLoadedMarker(barterBanner);
     }
 
     public void dismissCookie() {
         dismissCookieButton.clickIfPresent(10);
     }
 
-    public void typeSearch(String input) {
-        searchInput.type(input);
-    }
-
-    public ListAdvertisementsPage executeSearch() {
-        searchInput.sendKeys(Keys.ENTER);
-        return new ListAdvertisementsPage(getDriver());
-    }
-
-    @Override
-    public List<CardComponent> getAdvertisements() {
-        return advertisements;
+    public AdvertisementsPage clickBarterBanner() {
+        barterBanner.click();
+        return new BarterAdvertisementsPage(getDriver());
     }
 }

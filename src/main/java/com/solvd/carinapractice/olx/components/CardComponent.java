@@ -6,14 +6,21 @@ import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CardComponent extends AbstractUIObject {
 
     @FindBy(xpath = ".//span[@data-testid='adAddToFavorites' or @data-testid='adRemoveFromFavorites']/*")
     private ExtendedWebElement heartIcon;
 
+    @FindBy(css = "div[data-testid=dialog]")
+    private ExtendedWebElement dialogWindow;
+
     @FindBy(xpath = ".//*[self::p or self::h6][2]/preceding-sibling::*")
     private ExtendedWebElement advertisementTitle;
+
+    @FindBy(xpath = ".//*[self::p or self::h6][2]")
+    private ExtendedWebElement priceElement;
 
     @FindBy(xpath = ".")
     private ExtendedWebElement thisCard;
@@ -24,6 +31,8 @@ public class CardComponent extends AbstractUIObject {
 
     public void clickHeartIcon() {
         heartIcon.click(3);
+        waitUntil(ExpectedConditions.visibilityOf(dialogWindow), 1);
+        waitUntil(ExpectedConditions.invisibilityOf(dialogWindow), 1);
     }
 
     public String getId() {
@@ -41,5 +50,9 @@ public class CardComponent extends AbstractUIObject {
 
     public String getAdvertisementTitle() {
         return advertisementTitle.getText();
+    }
+
+    public String getPrice() {
+        return priceElement.getText();
     }
 }

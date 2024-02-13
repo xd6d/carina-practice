@@ -21,6 +21,7 @@ public class WebOlxTest extends AbstractTest {
     private static final String UNREGISTERED_EMAIL = R.TESTDATA.get("unregisteredEmail");
     private static final String PASSWORD = R.TESTDATA.get("password");
     private static final String SEARCH_INPUT = "airpods";
+    private static final String BARTER = "Обмін";
 
     @Test(description = "test-case 1")
     void verifyLoginWithUnregisteredEmailTest() {
@@ -34,8 +35,9 @@ public class WebOlxTest extends AbstractTest {
         Assert.assertFalse(loginPage.isUnregisteredEmailErrorMessagePresent(2), "Error message should not be present yet!");
 
         boolean isLoginSuccess = loginPage.login(UNREGISTERED_EMAIL, PASSWORD);
+        pause(3);
         Assert.assertTrue(isLoginSuccess, "Login attempt timeout!");
-        Assert.assertTrue(loginPage.isUnregisteredEmailErrorMessagePresent(10), "Error message does not present!");
+        Assert.assertTrue(loginPage.isUnregisteredEmailErrorMessagePresent(2), "Error message does not present!");
     }
 
     @Test(description = "test-case 2")
@@ -107,6 +109,7 @@ public class WebOlxTest extends AbstractTest {
         ListAdvertisementsPage advertisementsPage = homePage.executeSearch();
         advertisementsPage.assertPageOpened();
 
+        LOGGER.info("Found %d advertisements".formatted(advertisementsPage.getAdvertisements().size()));
         for (CardComponent advertisement : advertisementsPage.getAdvertisements()) {
             Assert.assertTrue(advertisement.getAdvertisementTitle().toLowerCase(Locale.ROOT).contains(SEARCH_INPUT),
                     "Title does not contain search input: %s. Search input: %s".formatted(advertisement.getAdvertisementTitle(), SEARCH_INPUT));
@@ -115,7 +118,19 @@ public class WebOlxTest extends AbstractTest {
     }
 
     @Test(description = "test case 5")
-    void verifyObminPriceBannerTest() {
+    void verifyBarterPriceBannerTest() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        homePage.assertPageOpened();
+        homePage.dismissCookie();
 
+        AdvertisementsPage barterAdvertisementsPage = homePage.clickBarterBanner();
+        barterAdvertisementsPage.assertPageOpened();
+
+        LOGGER.info("Found %d advertisements".formatted(barterAdvertisementsPage.getAdvertisements().size()));
+        for (CardComponent advertisement : barterAdvertisementsPage.getAdvertisements()) {
+            Assert.assertEquals(advertisement.getPrice(), BARTER,
+                    "Got %s instead of %s as price".formatted(advertisement.getPrice(), BARTER));
+        }
     }
 }
