@@ -6,12 +6,12 @@ import org.openqa.selenium.support.FindBy;
 
 public class ListAdvertisementsPage extends AdvertisementsPage {
 
-    @FindBy(className = "pagination-list")
-    private ExtendedWebElement paginationListElement;
+    @FindBy(xpath = "//button[contains(@id, 'category')]")
+    private ExtendedWebElement categoryButton;
 
     public ListAdvertisementsPage(WebDriver driver) {
         super(driver);
         setPageURL("/list/$ignore");
-        setUiLoadedMarker(paginationListElement);
+        setUiLoadedMarker(categoryButton);
     }
 }

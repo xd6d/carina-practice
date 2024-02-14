@@ -6,12 +6,12 @@ import org.openqa.selenium.support.FindBy;
 
 public class BarterAdvertisementsPage extends AdvertisementsPage {
 
-    @FindBy(className = "pagination-list")
-    private ExtendedWebElement paginationListElement;
+    @FindBy(xpath = "//button[contains(@id, 'category')]")
+    private ExtendedWebElement categoryButton;
 
     public BarterAdvertisementsPage(WebDriver driver) {
         super(driver);
         setPageURL("/obmen-barter/$ignore");
-        setUiLoadedMarker(paginationListElement);
+        setUiLoadedMarker(categoryButton);
     }
 }
