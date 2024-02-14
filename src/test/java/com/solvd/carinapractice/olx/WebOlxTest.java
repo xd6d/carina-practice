@@ -18,12 +18,12 @@ import java.util.Random;
 public class WebOlxTest extends AbstractTest {
 
     private static final Logger LOGGER = LogManager.getLogger(WebOlxTest.class);
-    private static final String UNREGISTERED_EMAIL = R.TESTDATA.get("unregisteredEmail");
+    private static final String UNREGISTERED_EMAIL = R.TESTDATA.get("unregistered_email");
     private static final String PASSWORD = R.TESTDATA.get("password");
     private static final String SEARCH_INPUT = "airpods";
     private static final String BARTER = "Обмін";
 
-    @Test(description = "test-case 1")
+    @Test
     void verifyLoginWithUnregisteredEmailTest() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
@@ -37,10 +37,10 @@ public class WebOlxTest extends AbstractTest {
         boolean isLoginSuccess = loginPage.login(UNREGISTERED_EMAIL, PASSWORD);
 
         Assert.assertTrue(isLoginSuccess, "Login attempt timeout!");
-        Assert.assertTrue(loginPage.isUnregisteredEmailErrorMessagePresent(2), "Error message does not present!");
+        Assert.assertTrue(loginPage.isUnregisteredEmailErrorMessagePresent(2), "Error message is not present!");
     }
 
-    @Test(description = "test-case 2")
+    @Test
     void verifyAddingFavouritesTest() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
@@ -59,7 +59,7 @@ public class WebOlxTest extends AbstractTest {
                 });
 
         FavouritesPage favouritesPage = homePage.clickFavourites();
-        favouritesPage.clickAds();
+        favouritesPage.clickSelectedAdsTab();
         favouritesPage.assertPageOpened();
 
         Assert.assertEquals(favouritesPage.getAdvertisements().size(), exceptedIds.size(), "Amount of added ads does not match!");
@@ -68,7 +68,7 @@ public class WebOlxTest extends AbstractTest {
                 "Ads does not match!");
     }
 
-    @Test(description = "test case 3")
+    @Test
     void verifyBasicAdvertisementInformationTest() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -80,7 +80,7 @@ public class WebOlxTest extends AbstractTest {
         int advertisementIndex = new Random().nextInt(homePage.getAdvertisements().size());
         LOGGER.info("Chose advertisement with index %d".formatted(advertisementIndex));
 
-        AdvertisementPage advertisementPage = homePage.getAdvertisements().get(advertisementIndex).click();
+        AdvertisementPage advertisementPage = homePage.getAdvertisements().get(advertisementIndex).clickAdvertisement();
         advertisementPage.assertPageOpened(5);
 
         softAssert.assertTrue(advertisementPage.isAdvertisementTitlePresent(), "Advertisement title is not present!");
@@ -98,7 +98,7 @@ public class WebOlxTest extends AbstractTest {
         softAssert.assertAll();
     }
 
-    @Test(description = "test case 4")
+    @Test
     void verifySearchResultTest() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
@@ -112,12 +112,12 @@ public class WebOlxTest extends AbstractTest {
         LOGGER.info("Found %d advertisements".formatted(advertisementsPage.getAdvertisements().size()));
         for (CardComponent advertisement : advertisementsPage.getAdvertisements()) {
             Assert.assertTrue(advertisement.getAdvertisementTitle().toLowerCase(Locale.ROOT).contains(SEARCH_INPUT),
-                    "Title does not contain search input: %s. Search input: %s".formatted(advertisement.getAdvertisementTitle(), SEARCH_INPUT));
+                    "Title does not contain search input: %s. Search input: %s.".formatted(advertisement.getAdvertisementTitle(), SEARCH_INPUT));
         }
 
     }
 
-    @Test(description = "test case 5")
+    @Test
     void verifyBarterPriceBannerTest() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
@@ -130,7 +130,7 @@ public class WebOlxTest extends AbstractTest {
         LOGGER.info("Found %d advertisements".formatted(barterAdvertisementsPage.getAdvertisements().size()));
         for (CardComponent advertisement : barterAdvertisementsPage.getAdvertisements()) {
             Assert.assertEquals(advertisement.getPrice(), BARTER,
-                    "Got %s instead of %s as price".formatted(advertisement.getPrice(), BARTER));
+                    "Got %s instead of %s as price.".formatted(advertisement.getPrice(), BARTER));
         }
     }
 }

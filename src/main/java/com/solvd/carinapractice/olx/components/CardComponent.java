@@ -39,7 +39,7 @@ public class CardComponent extends AbstractUIObject {
         return thisCard.getAttribute("id");
     }
 
-    public AdvertisementPage click() {
+    public AdvertisementPage clickAdvertisement() {
         thisCard.click();
         return new AdvertisementPage(getDriver());
     }

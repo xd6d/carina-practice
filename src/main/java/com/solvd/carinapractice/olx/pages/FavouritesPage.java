@@ -7,17 +7,18 @@ import org.openqa.selenium.support.FindBy;
 public class FavouritesPage extends AdvertisementsPage {
 
     @FindBy(xpath = "//button[contains(text(), 'Вибрані оголошення')]")
-    private ExtendedWebElement selectAdsButton;
+    private ExtendedWebElement selectedAdsButton;
 
     public FavouritesPage(WebDriver driver) {
         super(driver);
         setPageURL("/favorites");
-        setUiLoadedMarker(selectAdsButton);
+        setUiLoadedMarker(selectedAdsButton);
     }
 
-    public void clickAds() {
-        selectAdsButton.scrollTo();
-        if (selectAdsButton.isClickable())
-            selectAdsButton.click();
+    public void clickSelectedAdsTab() {
+        selectedAdsButton.scrollTo();
+        if (selectedAdsButton.isClickable()) {
+            selectedAdsButton.click();
+        }
     }
 }
