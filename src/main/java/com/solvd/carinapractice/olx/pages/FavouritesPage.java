@@ -16,8 +16,8 @@ public class FavouritesPage extends AdvertisementsPage {
     }
 
     public void clickSelectedAdsTab() {
-        selectedAdsButton.scrollTo();
         if (selectedAdsButton.isClickable()) {
+            selectedAdsButton.scrollTo();
             selectedAdsButton.click();
         }
     }
