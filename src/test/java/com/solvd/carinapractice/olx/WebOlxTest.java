@@ -7,6 +7,7 @@ import com.zebrunner.carina.utils.R;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -23,11 +24,17 @@ public class WebOlxTest extends AbstractTest {
     private static final String SEARCH_INPUT = "airpods";
     private static final String BARTER = "Обмін";
 
-    @Test
-    void verifyLoginWithUnregisteredEmailTest() {
+    @BeforeMethod
+    void openWebPage() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         homePage.assertPageOpened();
+        homePage.dismissCookie();
+    }
+
+    @Test
+    void verifyLoginWithUnregisteredEmailTest() {
+        HomePage homePage = new HomePage(getDriver());
         homePage.goToProfile();
 
         LoginPage loginPage = new LoginPage(getDriver());
@@ -43,9 +50,6 @@ public class WebOlxTest extends AbstractTest {
     @Test
     void verifyAddingFavouritesTest() {
         HomePage homePage = new HomePage(getDriver());
-        homePage.open();
-        homePage.assertPageOpened();
-        homePage.dismissCookie();
 
         List<String> exceptedIds = new ArrayList<>();
         homePage.getAdvertisements()
@@ -73,9 +77,6 @@ public class WebOlxTest extends AbstractTest {
         SoftAssert softAssert = new SoftAssert();
 
         HomePage homePage = new HomePage(getDriver());
-        homePage.open();
-        homePage.assertPageOpened();
-        homePage.dismissCookie();
 
         int advertisementIndex = new Random().nextInt(homePage.getAdvertisements().size());
         LOGGER.info("Chose advertisement with index %d".formatted(advertisementIndex));
@@ -101,9 +102,6 @@ public class WebOlxTest extends AbstractTest {
     @Test
     void verifySearchResultTest() {
         HomePage homePage = new HomePage(getDriver());
-        homePage.open();
-        homePage.assertPageOpened();
-        homePage.dismissCookie();
 
         homePage.typeSearch(SEARCH_INPUT);
         ListAdvertisementsPage advertisementsPage = homePage.executeSearch();
@@ -120,9 +118,6 @@ public class WebOlxTest extends AbstractTest {
     @Test
     void verifyBarterPriceBannerTest() {
         HomePage homePage = new HomePage(getDriver());
-        homePage.open();
-        homePage.assertPageOpened();
-        homePage.dismissCookie();
 
         AdvertisementsPage barterAdvertisementsPage = homePage.clickBarterBanner();
         barterAdvertisementsPage.assertPageOpened();
