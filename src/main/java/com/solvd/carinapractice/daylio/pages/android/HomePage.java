@@ -4,6 +4,7 @@ import com.solvd.carinapractice.daylio.components.android.MoodComponent;
 import com.solvd.carinapractice.daylio.pages.common.ChallengesPageBase;
 import com.solvd.carinapractice.daylio.pages.common.HomePageBase;
 import com.solvd.carinapractice.daylio.pages.common.MoodPageBase;
+import com.solvd.carinapractice.daylio.pages.common.MorePageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
@@ -15,12 +16,13 @@ import java.util.List;
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = HomePageBase.class)
 public class HomePage extends HomePageBase {
 
-    @FindBy(xpath = "//*[contains(@resource-id, 'plus_button_icon')]")
+    @FindBy(id = "net.daylio:id/plus_button_icon")
     private ExtendedWebElement plusButton;
 
+    @FindBy(id = "net.daylio:id/tab_more")
     private ExtendedWebElement moreButton;
 
-    @FindBy(xpath = "//*[contains(@resource-id, 'btn_today')]")
+    @FindBy(id = "net.daylio:id/btn_today")
     private ExtendedWebElement todayButton;
 
     @FindBy(id = "net.daylio:id/btn_new_goal")
@@ -94,6 +96,12 @@ public class HomePage extends HomePageBase {
     public ChallengesPageBase clickNewGoalButton() {
         newGoalButton.click(2);
         return new ChallengesPage(getDriver());
+    }
+
+    @Override
+    public MorePageBase clickMoreButton() {
+        moreButton.click(2);
+        return new MorePage(getDriver());
     }
 
     @Override

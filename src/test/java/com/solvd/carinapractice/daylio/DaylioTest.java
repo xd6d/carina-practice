@@ -16,6 +16,7 @@ public class DaylioTest extends AbstractTest implements IMobileUtils {
     private static final int MOOD_TO_CREATE = 1;
     private static final int MOOD_TO_EDIT = 3;
     private static final String NOTE = "Some note";
+    private static final String NEW_ACTIVITY_NAME = "New activity name";
 
     @BeforeMethod
     public void startApp() {
@@ -104,6 +105,29 @@ public class DaylioTest extends AbstractTest implements IMobileUtils {
 
     @Test
     public void verifyCreateActivity() {
+        HomePageBase homePage = initPage(HomePageBase.class);
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened!");
 
+        MorePageBase morePage = homePage.clickMoreButton();
+        Assert.assertTrue(morePage.isPageOpened(), "More page is not opened!");
+
+        ActivityGroupsPageBase activityGroupsPage = morePage.clickEditActivities();
+        Assert.assertTrue(activityGroupsPage.isPageOpened(), "Activity groups page is not opened!");
+
+        ActivityFolderPageBase otherFolderPage = activityGroupsPage.clickOtherFolder();
+        Assert.assertTrue(otherFolderPage.isPageOpened(), "Other folder page is not opened!");
+
+        ActivityPageBase activityPage = otherFolderPage.clickCreateNewActivity();
+        Assert.assertTrue(activityPage.isPageOpened(), "Activity page is not opened!");
+
+        activityPage.typeName(NEW_ACTIVITY_NAME);
+        hideKeyboard();
+
+        ActivityDetailsPageBase activityDetailsPage = activityPage.clickNext();
+        Assert.assertTrue(activityDetailsPage.isPageOpened(), "Activity details page is not opened!");
+
+        activityDetailsPage.clickSave();
+
+        Assert.assertTrue(otherFolderPage.isActivityPresentByName(NEW_ACTIVITY_NAME), "New activity is not present!");
     }
 }
