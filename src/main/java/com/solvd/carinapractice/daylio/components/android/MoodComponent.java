@@ -11,9 +11,6 @@ public class MoodComponent extends MoodComponentBase {
     @FindBy(id = "net.daylio:id/text_mood")
     private ExtendedWebElement moodName;
 
-    @FindBy(xpath = ".//*[contains(@resource-id, 'text_time')]")
-    private ExtendedWebElement moodTime;
-
     @FindBy(xpath = ".//*[contains(@resource-id, 'text_note')]")
     private ExtendedWebElement noteElement;
 
@@ -29,11 +26,6 @@ public class MoodComponent extends MoodComponentBase {
     @Override
     public String getMoodName() {
         return moodName.getText();
-    }
-
-    @Override
-    public String getTime() {
-        return moodTime.getText();
     }
 
     @Override
