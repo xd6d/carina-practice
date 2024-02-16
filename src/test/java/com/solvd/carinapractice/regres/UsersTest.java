@@ -13,7 +13,7 @@ import java.time.ZonedDateTime;
 public class UsersTest {
 
     @Test(description = "API call returns an exact expected user")
-    void verifyGetExactSingleUserByExistIdTest() {
+    public void verifyGetExactSingleUserByExistIdTest() {
         User user = User.builder()
                 .id(3)
                 .firstName("Emma")
@@ -29,14 +29,14 @@ public class UsersTest {
     }
 
     @Test
-    void verifyGetSingleUserByNotExistIdTest() {
+    public void verifyGetSingleUserByNotExistIdTest() {
         GetSingleUserMethod getSingleUserMethod = new GetSingleUserMethod(13);
         getSingleUserMethod.expectResponseStatus(HttpResponseStatusType.NOT_FOUND_404);
         getSingleUserMethod.callAPI();
     }
 
     @Test
-    void verifyCreateUserTest() {
+    public void verifyCreateUserTest() {
         User user = getDefaultUser();
 
         PostUserMethod postUserMethod = new PostUserMethod();
@@ -49,7 +49,7 @@ public class UsersTest {
     }
 
     @Test
-    void verifyPutUserUpdateTest() {
+    public void verifyPutUserUpdateTest() {
         User user = getDefaultUser();
 
         PutUserMethod putUserMethod = new PutUserMethod(15);
@@ -62,7 +62,7 @@ public class UsersTest {
     }
 
     @Test
-    void verifyPatchUserUpdateTest() {
+    public void verifyPatchUserUpdateTest() {
         User user = getDefaultUser();
 
         PatchUserMethod patchUserMethod = new PatchUserMethod(15);
@@ -75,7 +75,7 @@ public class UsersTest {
     }
 
     @Test
-    void verifyDeleteUserTest() {
+    public void verifyDeleteUserTest() {
         DeleteUserMethod deleteUserMethod = new DeleteUserMethod(1);
         Response response = deleteUserMethod.callAPIExpectSuccess();
         Assert.assertEquals(response.body().asString(), "");
