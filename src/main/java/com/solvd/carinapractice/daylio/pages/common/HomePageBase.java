@@ -12,5 +12,13 @@ public abstract class HomePageBase extends AbstractPage {
 
     public abstract MoodPageBase clickTodayButton();
 
+    public abstract void clickNewestMood();
+
+    public abstract void clickContextMenuDelete();
+
+    public abstract void clickPopupDelete();
+
     public abstract String getNewestMoodName();
+
+    public abstract int getTodayMoodsAmount();
 }

@@ -12,12 +12,12 @@ import org.testng.annotations.Test;
 public class DaylioTest extends AbstractTest implements IMobileUtils {
 
     @BeforeMethod
-    void startApp() {
+    public void startApp() {
         startApp("net.daylio");
     }
 
     @Test
-    void verifyCreateTodayMoodTest() {
+    public void verifyCreateTodayMoodTest() {
         HomePageBase homePage = initPage(HomePageBase.class);
         homePage.clickPlusButton();
         MoodPageBase moodPage = homePage.clickTodayButton();
@@ -27,6 +27,19 @@ public class DaylioTest extends AbstractTest implements IMobileUtils {
 
         moodDetailsPage.saveMood();
 
-        Assert.assertEquals(homePage.getNewestMoodName(), expectedMoodName, "Some other mood has been created");
+        Assert.assertEquals(homePage.getNewestMoodName(), expectedMoodName, "Some other mood has been created!");
+    }
+
+    @Test(dependsOnMethods = "verifyCreateTodayMoodTest")
+    public void verifyDeleteMoodTest() {
+        HomePageBase homePage = initPage(HomePageBase.class);
+        int moodsAmountBefore = homePage.getTodayMoodsAmount();
+        homePage.clickNewestMood();
+        homePage.clickContextMenuDelete();
+        homePage.clickPopupDelete();
+
+        Assert.assertEquals(homePage.getTodayMoodsAmount(), moodsAmountBefore-1, "Amount of moods is different!");
+
+        //TODO create list before -> delete first entry -> create list after -> assertLists ?????
     }
 }

@@ -1,11 +1,14 @@
 package com.solvd.carinapractice.daylio.pages.android;
 
+import com.solvd.carinapractice.daylio.components.android.MoodComponent;
 import com.solvd.carinapractice.daylio.pages.common.HomePageBase;
 import com.solvd.carinapractice.daylio.pages.common.MoodPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = HomePageBase.class)
 public class HomePage extends HomePageBase {
@@ -20,8 +23,14 @@ public class HomePage extends HomePageBase {
 
     private ExtendedWebElement newGoalButton;
 
-    @FindBy(xpath = "//*[contains(@resource-id, 'container_entries')]/child::*[1]//*[contains(@resource-id, 'text_mood')]")
-    private ExtendedWebElement newestMoodName;
+    @FindBy(xpath = "(//*[contains(@resource-id, 'container_entries')])[1]/child::*")
+    private List<MoodComponent> newestMoods;
+
+    @FindBy(xpath = "//*[contains(@resource-id, 'context_menu_container')]//*[child::*[@text='Delete']]")
+    private ExtendedWebElement contextMenuDeleteButton;
+
+    @FindBy(xpath = "//*[contains(@resource-id, 'buttonDefaultNeutral')]")
+    private ExtendedWebElement popupDeleteButton;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -39,7 +48,27 @@ public class HomePage extends HomePageBase {
     }
 
     @Override
+    public void clickNewestMood() {
+        newestMoods.get(0).clickMood();
+    }
+
+    @Override
+    public void clickContextMenuDelete() {
+        contextMenuDeleteButton.click(2);
+    }
+
+    @Override
+    public void clickPopupDelete() {
+        popupDeleteButton.click(2);
+    }
+
+    @Override
     public String getNewestMoodName() {
-        return newestMoodName.getText();
+        return newestMoods.get(0).getMoodName();
+    }
+
+    @Override
+    public int getTodayMoodsAmount() {
+        return newestMoods.size();
     }
 }
