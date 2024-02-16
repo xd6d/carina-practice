@@ -14,4 +14,6 @@ public abstract class MoodComponentBase extends AbstractUIObject {
     public abstract String getMoodName();
 
     public abstract String getTime();
+
+    public abstract String getNote();
 }

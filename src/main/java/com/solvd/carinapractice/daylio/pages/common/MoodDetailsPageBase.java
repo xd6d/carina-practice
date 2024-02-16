@@ -9,4 +9,6 @@ public abstract class MoodDetailsPageBase extends AbstractPage {
     }
 
     public abstract HomePageBase saveMood();
+
+    public abstract void addNote(String note);
 }

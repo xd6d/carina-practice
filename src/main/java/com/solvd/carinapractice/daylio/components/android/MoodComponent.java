@@ -14,6 +14,9 @@ public class MoodComponent extends MoodComponentBase {
     @FindBy(xpath = ".//*[contains(@resource-id, 'text_time')]")
     private ExtendedWebElement moodTime;
 
+    @FindBy(xpath = ".//*[contains(@resource-id, 'text_note')]")
+    private ExtendedWebElement noteElement;
+
     public MoodComponent(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
@@ -31,5 +34,10 @@ public class MoodComponent extends MoodComponentBase {
     @Override
     public String getTime() {
         return moodTime.getText();
+    }
+
+    @Override
+    public String getNote() {
+        return noteElement.getText();
     }
 }

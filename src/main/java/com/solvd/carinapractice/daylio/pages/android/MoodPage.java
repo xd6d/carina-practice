@@ -9,10 +9,6 @@ import org.openqa.selenium.support.FindBy;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = MoodPageBase.class)
 public class MoodPage extends MoodPageBase {
-
-    @FindBy(xpath = "//*[contains(@resource-id, 'mood_picker')]/child::*[%d]")
-    private ExtendedWebElement moodButton;
-
     @FindBy(xpath = "//*[contains(@resource-id, 'mood_picker')]/child::*[%d]/android.widget.TextView")
     private ExtendedWebElement moodName;
 
@@ -29,7 +25,7 @@ public class MoodPage extends MoodPageBase {
 
     @Override
     public MoodDetailsPageBase clickMood() {
-        moodButton.format(position).click();
+        moodName.format(position).click();
         return new MoodDetailsPage(getDriver());
     }
 

@@ -7,6 +7,7 @@ import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -31,6 +32,9 @@ public class HomePage extends HomePageBase {
 
     @FindBy(xpath = "//*[contains(@resource-id, 'buttonDefaultNeutral')]")
     private ExtendedWebElement popupDeleteButton;
+
+    @FindBy(xpath = "//*[contains(@resource-id, 'context_menu_container')]//*[child::*[@text='Edit']]")
+    private ExtendedWebElement contextMenuEditButton;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -58,6 +62,12 @@ public class HomePage extends HomePageBase {
     }
 
     @Override
+    public MoodPageBase clickContextMenuEdit() {
+        contextMenuEditButton.click(2);
+        return new MoodPage(getDriver());
+    }
+
+    @Override
     public void clickPopupDelete() {
         popupDeleteButton.click(2);
     }
@@ -68,7 +78,13 @@ public class HomePage extends HomePageBase {
     }
 
     @Override
+    public String getNewestMoodNote() {
+        return newestMoods.get(0).getNote();
+    }
+
+    @Override
     public int getTodayMoodsAmount() {
+        waitUntil(ExpectedConditions.visibilityOf(plusButton), 2);
         return newestMoods.size();
     }
 }

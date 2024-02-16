@@ -14,6 +14,9 @@ public class MoodDetailsPage extends MoodDetailsPageBase implements IMobileUtils
     @FindBy(xpath = "//*[contains(@resource-id, 'layout_bottom_save')]")
     private ExtendedWebElement saveButton;
 
+    @FindBy(xpath = "//*[contains(@resource-id, 'text_note')]")
+    private ExtendedWebElement noteInput;
+
     public MoodDetailsPage(WebDriver driver) {
         super(driver);
     }
@@ -23,5 +26,10 @@ public class MoodDetailsPage extends MoodDetailsPageBase implements IMobileUtils
         swipe(saveButton);
         saveButton.click(3);
         return new HomePage(getDriver());
+    }
+
+    @Override
+    public void addNote(String note) {
+        noteInput.type(note);
     }
 }
