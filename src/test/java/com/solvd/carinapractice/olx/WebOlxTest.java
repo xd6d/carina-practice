@@ -25,7 +25,7 @@ public class WebOlxTest extends AbstractTest {
     private static final String BARTER = "Обмін";
 
     @BeforeMethod
-    void openWebPage() {
+    public void openWebPage() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         homePage.assertPageOpened();
@@ -33,7 +33,7 @@ public class WebOlxTest extends AbstractTest {
     }
 
     @Test
-    void verifyLoginWithUnregisteredEmailTest() {
+    public void verifyLoginWithUnregisteredEmailTest() {
         HomePage homePage = new HomePage(getDriver());
         homePage.goToProfile();
 
@@ -48,7 +48,7 @@ public class WebOlxTest extends AbstractTest {
     }
 
     @Test
-    void verifyAddingFavouritesTest() {
+    public void verifyAddingFavouritesTest() {
         HomePage homePage = new HomePage(getDriver());
 
         List<String> exceptedIds = new ArrayList<>();
@@ -73,7 +73,7 @@ public class WebOlxTest extends AbstractTest {
     }
 
     @Test
-    void verifyBasicAdvertisementInformationTest() {
+    public void verifyBasicAdvertisementInformationTest() {
         SoftAssert softAssert = new SoftAssert();
 
         HomePage homePage = new HomePage(getDriver());
@@ -100,7 +100,7 @@ public class WebOlxTest extends AbstractTest {
     }
 
     @Test
-    void verifySearchResultTest() {
+    public void verifySearchResultTest() {
         HomePage homePage = new HomePage(getDriver());
 
         homePage.typeSearch(SEARCH_INPUT);
@@ -116,7 +116,7 @@ public class WebOlxTest extends AbstractTest {
     }
 
     @Test
-    void verifyBarterPriceBannerTest() {
+    public void verifyBarterPriceBannerTest() {
         HomePage homePage = new HomePage(getDriver());
 
         AdvertisementsPage barterAdvertisementsPage = homePage.clickBarterBanner();
