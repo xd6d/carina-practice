@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class MoodComponent extends MoodComponentBase {
 
-    @FindBy(xpath = ".//*[contains(@resource-id, 'text_mood')]")
+    @FindBy(id = "net.daylio:id/text_mood")
     private ExtendedWebElement moodName;
 
     @FindBy(xpath = ".//*[contains(@resource-id, 'text_time')]")

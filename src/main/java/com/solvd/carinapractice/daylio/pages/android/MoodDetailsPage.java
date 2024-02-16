@@ -32,4 +32,10 @@ public class MoodDetailsPage extends MoodDetailsPageBase implements IMobileUtils
     public void addNote(String note) {
         noteInput.type(note);
     }
+
+    @Override
+    public boolean isPageOpened() {
+        swipe(noteInput);
+        return noteInput.isElementPresent(5);
+    }
 }

@@ -25,4 +25,6 @@ public abstract class HomePageBase extends AbstractPage {
     public abstract String getNewestMoodNote();
 
     public abstract int getTodayMoodsAmount();
+
+    public abstract ChallengesPageBase clickNewGoalButton();
 }

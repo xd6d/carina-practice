@@ -1,6 +1,7 @@
 package com.solvd.carinapractice.daylio.pages.android;
 
 import com.solvd.carinapractice.daylio.components.android.MoodComponent;
+import com.solvd.carinapractice.daylio.pages.common.ChallengesPageBase;
 import com.solvd.carinapractice.daylio.pages.common.HomePageBase;
 import com.solvd.carinapractice.daylio.pages.common.MoodPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
@@ -22,6 +23,7 @@ public class HomePage extends HomePageBase {
     @FindBy(xpath = "//*[contains(@resource-id, 'btn_today')]")
     private ExtendedWebElement todayButton;
 
+    @FindBy(id = "net.daylio:id/btn_new_goal")
     private ExtendedWebElement newGoalButton;
 
     @FindBy(xpath = "(//*[contains(@resource-id, 'container_entries')])[1]/child::*")
@@ -86,5 +88,16 @@ public class HomePage extends HomePageBase {
     public int getTodayMoodsAmount() {
         waitUntil(ExpectedConditions.visibilityOf(plusButton), 2);
         return newestMoods.size();
+    }
+
+    @Override
+    public ChallengesPageBase clickNewGoalButton() {
+        newGoalButton.click(2);
+        return new ChallengesPage(getDriver());
+    }
+
+    @Override
+    public boolean isPageOpened() {
+        return plusButton.isElementPresent(5);
     }
 }
