@@ -16,6 +16,7 @@ public class DaylioTest extends AbstractTest implements IMobileUtils {
     private static final int MOOD_TO_CREATE = 1;
     private static final int MOOD_TO_EDIT = 3;
     private static final String NOTE = "Some note";
+    private static final String ACTIVITY_FOLDER = "Other";
     private static final String NEW_ACTIVITY_NAME = "New activity name";
 
     @BeforeMethod
@@ -114,8 +115,8 @@ public class DaylioTest extends AbstractTest implements IMobileUtils {
         ActivityGroupsPageBase activityGroupsPage = morePage.clickEditActivities();
         Assert.assertTrue(activityGroupsPage.isPageOpened(), "Activity groups page is not opened!");
 
-        ActivityFolderPageBase otherFolderPage = activityGroupsPage.clickOtherFolder();
-        Assert.assertTrue(otherFolderPage.isPageOpened(), "Other folder page is not opened!");
+        ActivityFolderPageBase otherFolderPage = activityGroupsPage.clickFolder(ACTIVITY_FOLDER);
+        Assert.assertTrue(otherFolderPage.isPageOpened(), "%s folder page is not opened!".formatted(ACTIVITY_FOLDER));
 
         ActivityPageBase activityPage = otherFolderPage.clickCreateNewActivity();
         Assert.assertTrue(activityPage.isPageOpened(), "Activity page is not opened!");

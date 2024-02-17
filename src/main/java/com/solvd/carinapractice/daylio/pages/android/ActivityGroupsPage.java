@@ -8,21 +8,24 @@ import org.openqa.selenium.support.FindBy;
 
 public class ActivityGroupsPage extends ActivityGroupsPageBase {
 
-    @FindBy(xpath = "//*[contains(@text, 'Other')]")
-    private ExtendedWebElement otherFolder;
+    @FindBy(xpath = "//*[contains(@text, '%s')]")
+    private ExtendedWebElement folderByName;
+
+    @FindBy(id = "net.daylio:id/button_primary")
+    private ExtendedWebElement addGroupButton;
 
     public ActivityGroupsPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    public ActivityFolderPageBase clickOtherFolder() {
-        otherFolder.click(2);
+    public ActivityFolderPageBase clickFolder(String name) {
+        folderByName.format(name).click(2);
         return new ActivityFolderPage(getDriver());
     }
 
     @Override
     public boolean isPageOpened() {
-        return otherFolder.isElementPresent(5);
+        return addGroupButton.isElementPresent(5);
     }
 }

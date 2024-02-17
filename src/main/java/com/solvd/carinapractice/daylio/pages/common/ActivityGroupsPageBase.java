@@ -8,5 +8,5 @@ public abstract class ActivityGroupsPageBase extends AbstractPage {
         super(driver);
     }
 
-    public abstract ActivityFolderPageBase clickOtherFolder();
+    public abstract ActivityFolderPageBase clickFolder(String name);
 }

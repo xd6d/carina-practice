@@ -30,6 +30,7 @@ public class MoodDetailsPage extends MoodDetailsPageBase implements IMobileUtils
 
     @Override
     public void addNote(String note) {
+        swipe(noteInput);
         noteInput.type(note);
     }
 
