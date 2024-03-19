@@ -15,7 +15,7 @@ public abstract class AdvertisementsPage extends BasePage {
     @FindBy(id = "search")
     private ExtendedWebElement searchInput;
 
-    public AdvertisementsPage(WebDriver driver) {
+    protected AdvertisementsPage(WebDriver driver) {
         super(driver);
     }
 

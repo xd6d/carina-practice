@@ -13,7 +13,7 @@ public abstract class BasePage extends AbstractPage {
     @FindBy(css = "svg[aria-label='Виділені']")
     private ExtendedWebElement favouritesButton;
 
-    public BasePage(WebDriver driver) {
+    protected BasePage(WebDriver driver) {
         super(driver);
     }
 
