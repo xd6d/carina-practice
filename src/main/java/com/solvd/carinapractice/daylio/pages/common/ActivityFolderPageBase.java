@@ -4,7 +4,7 @@ import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
 public abstract class ActivityFolderPageBase extends AbstractPage {
-    public ActivityFolderPageBase(WebDriver driver) {
+    protected ActivityFolderPageBase(WebDriver driver) {
         super(driver);
     }
 

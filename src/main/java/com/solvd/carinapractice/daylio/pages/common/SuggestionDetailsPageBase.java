@@ -4,7 +4,7 @@ import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
 public abstract class SuggestionDetailsPageBase extends AbstractPage {
-    public SuggestionDetailsPageBase(WebDriver driver) {
+    protected SuggestionDetailsPageBase(WebDriver driver) {
         super(driver);
     }
 

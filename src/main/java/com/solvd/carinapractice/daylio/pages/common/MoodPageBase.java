@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public abstract class MoodPageBase extends AbstractPage {
 
-    public MoodPageBase(WebDriver driver) {
+    protected MoodPageBase(WebDriver driver) {
         super(driver);
     }
 

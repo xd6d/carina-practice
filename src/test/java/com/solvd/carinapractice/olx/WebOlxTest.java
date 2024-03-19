@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -32,8 +33,17 @@ public class WebOlxTest extends AbstractTest {
         homePage.dismissCookie();
     }
 
-    @Test
-    public void verifyLoginWithUnregisteredEmailTest() {
+    @DataProvider
+    public Object[][] emailPasswordProvider() {
+        return new Object[][]{
+                {UNREGISTERED_EMAIL, PASSWORD},
+                {"asd@asd.com", "asdasdasd"},
+                {"asd", "asdasdasd"}
+        };
+    }
+
+    @Test(dataProvider = "emailPasswordProvider")
+    public void verifyLoginWithUnregisteredEmailTest(String email, String password) {
         HomePage homePage = new HomePage(getDriver());
         homePage.goToProfile();
 
@@ -41,7 +51,7 @@ public class WebOlxTest extends AbstractTest {
         loginPage.assertPageOpened();
         Assert.assertFalse(loginPage.isUnregisteredEmailErrorMessagePresent(2), "Error message should not be present yet!");
 
-        boolean isLoginSuccess = loginPage.login(UNREGISTERED_EMAIL, PASSWORD);
+        boolean isLoginSuccess = loginPage.login(email, password);
 
         Assert.assertTrue(isLoginSuccess, "Login attempt timeout!");
         Assert.assertTrue(loginPage.isUnregisteredEmailErrorMessagePresent(2), "Error message is not present!");

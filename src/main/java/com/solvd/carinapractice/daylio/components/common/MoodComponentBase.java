@@ -5,7 +5,7 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 
 public abstract class MoodComponentBase extends AbstractUIObject {
-    public MoodComponentBase(WebDriver driver, SearchContext searchContext) {
+    protected MoodComponentBase(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 

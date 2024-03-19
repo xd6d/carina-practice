@@ -4,7 +4,7 @@ import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
 public abstract class ChallengeDetailsPageBase extends AbstractPage {
-    public ChallengeDetailsPageBase(WebDriver driver) {
+    protected ChallengeDetailsPageBase(WebDriver driver) {
         super(driver);
     }
 
